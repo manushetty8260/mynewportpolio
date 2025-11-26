@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio - Manoj HK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            margin: 30px auto;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-box h4 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .skill-category h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .skill-item {
+            margin-bottom: 12px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .project-info p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .project-tags {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+
+        /* Education Section */
+        .education-item {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        .education-item h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .education-item .institution {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .education-item .date {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .contact-item {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Alex Johnson</h1>
+        <p>Full-Stack Developer | Problem Solver | Creative Thinker</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Hello! I'm a passionate student developer with a keen interest in web development and software engineering. 
+                    I enjoy creating innovative solutions to real-world problems and continuously learning new technologies.
+                </p>
+                <p>
+                    With hands-on experience in full-stack development, I have worked on various projects that have 
+                    strengthened my coding skills and understanding of software architecture. I'm dedicated to writing clean, 
+                    maintainable code and creating user-friendly applications.
+                </p>
+                <p>
+                    When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
+                    or sharing knowledge with fellow developers.
+                </p>
+            </div>
+            <div class="about-stats">
+                <div class="stat-box">
+                    <h4>5+</h4>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-box">
+                    <h4>2+</h4>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-box">
+                    <h4>10+</h4>
+                    <p>Technologies</p>
+                </div>
+                <div class="stat-box">
+                    <h4>100%</h4>
+                    <p>Dedication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Frontend Development</h4>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>React.js</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>Backend Development</h4>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Node.js</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Express.js</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>MongoDB</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>Other Skills</h4>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Git/GitHub</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Python</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Problem Solving</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🛍️</div>
+                <div class="project-info">
+                    <h3>E-Commerce Platform</h3>
+                    <p>
+                        A full-stack e-commerce application with product listings, shopping cart functionality, 
+                        and secure payment integration.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">📝</div>
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <p>
+                        A responsive task management application with features like task creation, editing, 
+                        deletion, and priority levels.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🎬</div>
+                <div class="project-info">
+                    <h3>Movie Review Platform</h3>
+                    <p>
+                        A web application that allows users to search for movies, read reviews, and rate films. 
+                        Integrated with a movie database API.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">API</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">📊</div>
+                <div class="project-info">
+                    <h3>Data Analytics Dashboard</h3>
+                    <p>
+                        A dashboard application that visualizes complex data using charts and graphs. 
+                        Features real-time data updates and interactive filtering.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Chart.js</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">💬</div>
+                <div class="project-info">
+                    <h3>Chat Application</h3>
+                    <p>
+                        A real-time chat application with user authentication, message history, 
+                        and online status indicators.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Socket.io</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">React</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🎮</div>
+                <div class="project-info">
+                    <h3>Game Development</h3>
+                    <p>
+                        An interactive web-based game with physics simulation, collision detection, 
+                        and interactive gameplay mechanics.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Canvas</span>
+                        <span class="tag">HTML5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="container">
+        <h2>Education</h2>
+        
+        <div class="education-item">
+            <h3>Bachelor of Science in Computer Science</h3>
+            <p class="institution">University of Technology</p>
+            <p class="date">2020 - Present</p>
+            <p>
+                Relevant Coursework: Data Structures, Algorithms, Web Development, Database Management, 
+                Software Engineering, Artificial Intelligence
+            </p>
+        </div>
+
+        <div class="education-item">
+            <h3>Full-Stack Web Development Bootcamp</h3>
+            <p class="institution">Code Academy</p>
+            <p class="date">2022</p>
+            <p>
+                Completed intensive training in frontend and backend development with hands-on projects 
+                and real-world problem solving.
+            </p>
+        </div>
+
+        <div class="education-item">
+            <h3>Certification: Python for Data Science</h3>
+            <p class="institution">DataCamp</p>
+            <p class="date">2023</p>
+            <p>
+                Specialized in data manipulation, visualization, and analysis using Python libraries 
+                like Pandas and Matplotlib.
+            </p>
+        </div>
+
+        <div class="education-item">
+            <h3>AWS Certified Cloud Practitioner</h3>
+            <p class="institution">Amazon Web Services</p>
+            <p class="date">2024</p>
+            <p>
+                Earned certification demonstrating knowledge of AWS cloud services, architecture, 
+                and best practices.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+        <h2>Get In Touch</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h3>📧 Email</h3>
+                <a href="mailto:alex@example.com">alex@example.com</a>
+            </div>
+            <div class="contact-item">
+                <h3>💼 LinkedIn</h3>
+                <a href="https://linkedin.com/in/alexjohnson" target="_blank">linkedin.com/in/alexjohnson</a>
+            </div>
+            <div class="contact-item">
+                <h3>🐙 GitHub</h3>
+                <a href="https://github.com/alexjohnson" target="_blank">github.com/alexjohnson</a>
+            </div>
+            <div class="contact-item">
+                <h3>🐦 Twitter</h3>
+                <a href="https://twitter.com/alexjohnson" target="_blank">@alexjohnson</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Alex Johnson. All rights reserved. | Created with passion and code</p>
+    </footer>
+</body>
+</html>
